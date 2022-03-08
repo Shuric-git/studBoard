@@ -1,5 +1,8 @@
 (() => {
     'use strict'
+
+    const headersArray = ['ФИО', 'Возраст', 'Период обучения', 'Факультет']
+
     function createDesk() {
         let desk = document.createElement('div');
         desk.classList.add('container-fluid')
@@ -8,94 +11,142 @@
     }
 
     function studentAddForm() {
-        let form = document.createElement('form');
-        let inputName = document.createElement('input');
-        let inputMiddleName = document.createElement('input');
-        let inputSurname = document.createElement('input');
-        let inputStudyStart = document.createElement('input');
-        let inputFak = document.createElement('input');
-        let subButton = document.createElement('button')
+        const form = document.createElement('form');
+        const inputName = document.createElement('input');
+        const inputMiddleName = document.createElement('input');
+        const inputSurname = document.createElement('input');
+        const inputStudyStart = document.createElement('input');
+        const inputAge = document.createElement('input');
+        const inputFak = document.createElement('input');
+        const subButton = document.createElement('button')
 
         form.classList.add('input-group', 'mb-3');
-        form.id = 'formish'
-        inputName.classList.add('form-control', 'nameInput');
+        form.id = 'formish';
+        inputName.classList.add('form-control', 'nameInput', 'addInput');
         inputName.value = 'Тест';
-        inputMiddleName.classList.add('form-control', 'nameInput');
+        inputMiddleName.classList.add('form-control', 'nameInput', 'addInput');
         inputMiddleName.value = 'Тестович';
-        inputSurname.classList.add('form-control', 'nameInput');
+        inputSurname.classList.add('form-control', 'nameInput', 'addInput');
         inputSurname.value = 'Тестов';
-        inputStudyStart.classList.add('form-control');
-        inputStudyStart.value = '2018.7.1'
-        inputFak.classList.add('form-control');
+        inputAge.classList.add('form-control', 'addInput');
+        inputAge.value = '08.22.1986'
+        inputStudyStart.classList.add('form-control', 'addInput');
+        inputStudyStart.value = '2018'
+        inputFak.classList.add('form-control', 'addInput');
         inputFak.value = 'Тестерин';
-        subButton.classList.add('btn', 'btn-primary',);
+        subButton.classList.add('btn', 'btn-primary');
         subButton.textContent = 'Добавить студента';
 
-        form.append(inputName);
-        form.append(inputMiddleName);
-        form.append(inputSurname);
-        form.append(inputStudyStart);
-        form.append(inputFak);
-        form.append(subButton)
+        form.append(
+            inputName,
+            inputMiddleName,
+            inputSurname,
+            inputAge,
+            inputStudyStart,
+            inputFak,
+            subButton
+            );
+
 
         return {
             form,
             inputName,
             inputMiddleName,
             inputSurname,
+            inputAge,
             inputStudyStart,
             inputFak,
             subButton,
         };
     }
 
-    function createFilters(studArr) {
-        let optionForm = document.createElement('form');
-        optionForm.classList.add('input-group', 'mb-3');
-        let filterName = document.createElement('select');
-        filterName.classList.add('form-select');
-        let filterStudyStart = document.createElement('select');
-        filterStudyStart.classList.add('form-select');
-        let filterFak = document.createElement('select');
-        filterFak.classList.add('form-select')
+    function createFilters() {
+        const filterForm = document.createElement('form');
+        const filterName = document.createElement('input');
+        const filterStudyPeriod = document.createElement('input');
+        const filterAge = document.createElement('input');
+        const filterFak = document.createElement('input');
+        const filterButton = document.createElement('button');
+        const clearFilterButton = document.createElement('button');
 
-        let mappedNames = studArr.map( person => {
-            return person.name
-        })
+        filterForm.classList.add('input-group', 'mb-3');
+        filterForm.id = 'filterForm';
+        filterName.classList.add('form-control', "filterNameInput", 'filterInput');
+        filterStudyPeriod.classList.add('form-control', 'filterStudyPeriodInput', 'filterInput');
+        filterAge.classList.add('form-control', 'filterAgeInput', 'filterInput');
+        filterFak.classList.add('form-control', 'filterFakInput', 'filterInput');
+        filterButton.classList.add('filterButton', 'btn', 'btn-primary');
+        filterButton.id = 'filterButtonId'
+        clearFilterButton.classList.add('clearFilterButton', 'btn', 'btn-primary');
+        clearFilterButton.id = 'clearFilterButtonId'
+        
 
-        for ( let i = 0; i < mappedNames.length; i++) {
-            let optionName = document.createElement('option');
-            optionName.innerText = mappedNames[i]
-            filterName.append(optionName)
-        }
-        optionForm.append(filterName)
-
-        let mappedStudyStart = studArr.map( person => {
-            return person.studyPeriod
-        })
-
-        for ( let i = 0; i < mappedStudyStart.length; i++) {
-            let optionStudyStart = document.createElement('option');
-            optionStudyStart.innerText = mappedStudyStart[i]
-            filterStudyStart.append(optionStudyStart)
-        }
-        optionForm.append(filterStudyStart)
-
-        let mappedFak = studArr.map( person => {
-            return person.fak
-        })
-
-        for ( let i = 0; i < mappedFak.length; i++) {
-            let optionFak = document.createElement('option');
-            optionFak.innerText = mappedFak[i]
-            filterFak.append(optionFak)
-        }
-        optionForm.append(filterFak)
+        filterForm.append(
+            clearFilterButton, 
+            filterName,
+            filterStudyPeriod,
+            filterAge,
+            filterFak,
+            filterButton
+            );
 
         return {
-            optionForm,
+            filterForm,
+            filterName,
+            filterStudyPeriod,
+            filterAge,
+            filterFak,
+            filterButton,
         }
     }
+
+    // function createFilters(studArr) {
+    //     let optionForm = document.createElement('form');
+    //     optionForm.classList.add('input-group', 'mb-3', 'filter');
+    //     let filterName = document.createElement('select');
+    //     filterName.classList.add('form-select');
+    //     let filterStudyStart = document.createElement('select');
+    //     filterStudyStart.classList.add('form-select');
+    //     let filterFak = document.createElement('select');
+    //     filterFak.classList.add('form-select')
+
+    //     let mappedNames = studArr.map( person => {
+    //         return person.name
+    //     })
+
+    //     for ( let i = 0; i < mappedNames.length; i++) {
+    //         let optionName = document.createElement('option');
+    //         optionName.innerText = mappedNames[i]
+    //         filterName.append(optionName)
+    //     }
+    //     optionForm.append(filterName)
+
+    //     let mappedStudyStart = studArr.map( person => {
+    //         return person.studyPeriod
+    //     })
+
+    //     for ( let i = 0; i < mappedStudyStart.length; i++) {
+    //         let optionStudyStart = document.createElement('option');
+    //         optionStudyStart.innerText = mappedStudyStart[i]
+    //         filterStudyStart.append(optionStudyStart)
+    //     }
+    //     optionForm.append(filterStudyStart)
+
+    //     let mappedFak = studArr.map( person => {
+    //         return person.fak
+    //     })
+
+    //     for ( let i = 0; i < mappedFak.length; i++) {
+    //         let optionFak = document.createElement('option');
+    //         optionFak.innerText = mappedFak[i]
+    //         filterFak.append(optionFak)
+    //     }
+    //     optionForm.append(filterFak)
+
+    //     return {
+    //         optionForm,
+    //     }
+    // }
 
     function createStudList(studArr) {
         const studList = document.createElement('ul')
@@ -103,8 +154,6 @@
 
         const headersStudList = document.createElement('ul');
         headersStudList.classList.add('list-group', 'list-group-horizontal', 'listHeaders');
-
-        const headersArray = ['Имя', 'Отчество', 'Фамилия', 'Дата окончания обучения', 'Факультет']
 
         for ( let i = 0; i != headersArray.length; i++) {
             const headersStudListItem = document.createElement('li');
@@ -116,18 +165,29 @@
 
         studList.append(headersStudList)
 
-        for (let prop of studArr) {
-            let students = prop
+        const mappedStudArr = []
+        
+        for ( let i = 0; i < studArr.length; i++) {
+            const mappedStudObj = {};
+            mappedStudObj.fio = studArr[i].name + ' ' + studArr[i].middleName + ' ' + studArr[i].surname;
+            mappedStudObj.age = _calculateAge(new Date(studArr[i].age));
+            mappedStudObj.studyPeriod = studyPeriodCalcuate(studArr[i].studyPeriod);
+            mappedStudObj.fak = studArr[i].fak;
+            mappedStudArr.push(mappedStudObj);
+        };
+
+        for (let prop of mappedStudArr) {
+            let students = prop;
             const studListItem = document.createElement('li');
             studListItem.classList.add('list-group-item');
             const studPropList = document.createElement('ul');
             studPropList.classList.add('list-group','list-group-horizontal', 'studPropList');
-            studList.append(studListItem)
-            studListItem.append(studPropList)
+            studList.append(studListItem);
+            studListItem.append(studPropList);
             for (let key of Object.values(students)) {
                 const studProp = document.createElement('li');
                 studProp.classList.add('list-group-item', 'flex-fill', 'studItem');
-                studPropList.append(studProp)
+                studPropList.append(studProp);
                 const text = document.createTextNode(key);
                 studProp.prepend(text);
             }  
@@ -137,6 +197,25 @@
         }
     }
 
+    function studyPeriodCalcuate(studyStartYear) {
+        let currentDate = new Date();
+        console.log(currentDate.getFullYear())
+        let studyDoneDate = +studyStartYear + 4;
+        if (studyDoneDate < currentDate.getFullYear()) {
+            studyDoneDate += (' (закончил)')
+        } else if (studyDoneDate === currentDate.getFullYear() && currentDate.getMonth() >= 7) {
+            studyDoneDate += (' (закончил)')
+        }
+        const studyPeriod = studyStartYear + '-' + studyDoneDate;
+        return studyPeriod
+    }
+
+    function _calculateAge(birthday) { // birthday is a date
+        var ageDifMs = Date.now() - birthday.getTime();
+        var ageDate = new Date(ageDifMs); // miliseconds from epoch
+        return Math.abs(ageDate.getUTCFullYear() - 1970);
+    }
+
     function createStudDeskApp(container) {
 
         let studArr = [
@@ -144,28 +223,32 @@
                 name: 'Яна',
                 middleName: 'Сановна',
                 surname: 'Павлова',
-                studyPeriod: '05.11.2012-05.11.2016',
+                age: '03.07.1995',
+                studyPeriod: '2003',
                 fak: 'Мандалор',
             },
             {
                 name: 'Пал',
                 middleName: 'Олегыч',
                 surname: 'Янов',
-                studyPeriod: '17.05.1900-17.05.1904',
+                age: '03.02.1982',
+                studyPeriod: '2000',
                 fak: 'Пуфендуй',
             },
             {
                 name: 'Сан',
                 middleName: 'Палыч',
                 surname: 'Олегов',
-                studyPeriod: '23.07.1905-23.07.1909',
+                age: '07.01.1987',
+                studyPeriod: '2005',
                 fak: 'Флапифлай',
             },
             {
                 name: 'Олег',
                 middleName: 'Яныч',
                 surname: 'Санов',
-                studyPeriod: '23.12.2117-23.12.2121',
+                age: '06.25.2001',
+                studyPeriod: '2019',
                 fak: 'Рампапорт',
             },
         ]
@@ -173,27 +256,27 @@
         let studDesk = createDesk();
         let addForm = studentAddForm();
         let createList = createStudList(studArr);
-        let createNameFilter = createFilters(studArr)
+        const addFilterForm = createFilters()
+        // let createNameFilter = createFilters(studArr)
         
         container.append(addForm.form);
-        container.append(createNameFilter.optionForm)
+        container.append(addFilterForm.filterForm)
         container.append(studDesk);
         studDesk.append(createList.studList);
 
         
-        createNameFilter.optionForm.addEventListener('click', function(e) {
-            if (e.target.tagName ==='OPTION') {
-                e.preventDefault();
-                e.target.classList.toggle('select')
-                console.log(e)
-
-            }
-        })
+        // createNameFilter.optionForm.addEventListener('change', function(e) {
+        //     // if (e.target.tagName ==='OPTION') {
+        //         e.preventDefault();
+        //         e.target.classList.toggle('select')
+        //         console.log(e.target)
+        //     // }
+        // })
         
         addForm.form.addEventListener('click', function(e) {
             e.preventDefault();
             if (e.target.tagName === 'BUTTON') {
-                let elems = document.getElementsByTagName('input');
+                let elems = document.querySelectorAll('.addInput');
                 for (let i = 0; i < elems.length; i++) {
                         if (elems[i].value === ''){
 	                    elems[i].placeholder = 'Вы забыли заполнить это поле';
@@ -207,7 +290,7 @@
                     }
                 }
 
-                const dateRegex = /\d{4}\W\d{1,2}\W\d{1,2}/
+                const dateRegex = /\d{4}/
 
                 if (!addForm.inputStudyStart.value.match(dateRegex)) {
                     addForm.inputStudyStart.value = 'Введите дату в формате ГГГГ.ММ.ДД';
@@ -215,17 +298,6 @@
                 }
 
                 let studyStartInput = addForm.inputStudyStart.value
-                const splitterRegex = /\W/
-
-                let dateString = studyStartInput.split(splitterRegex)
-                let studyStartDate = new Date();
-                let currentDate = new Date();
-                studyStartDate.setFullYear(+dateString[0], +dateString[1], +dateString[2],)
-                let studyStart = studyStartDate.getDate() + '.' + (studyStartDate.getMonth() + 1) + '.' +  (studyStartDate.getFullYear());
-                let studyDoneDate = studyStartDate.getDate() + '.' + (studyStartDate.getMonth() + 1) + '.' +  (studyStartDate.getFullYear() + 4);
-                if (currentDate.getMonth() >= 7) {
-                    studyDoneDate += (' (закончил)')
-                }
 
                 // function CreateStudent(name, middleName, surname, studyDoneDate, fak) {
                 //     this.name = name;
@@ -237,20 +309,20 @@
     
                 // let newStudent = new CreateStudent(addForm.inputName.value, addForm.inputMiddleName.value, addForm.inputSurname.value, studyDoneDate, addForm.inputFak.value)
 
-                function createStudent(name, middleName, surname, studyStart, studyDoneDate, fak) {
+                function createStudent(name, middleName, surname, age, studyPeriod, fak) {
                     let newStudent = {}
-                    newStudent.name = name;
+                    newStudent.name = name
                     newStudent.middleName = middleName;
                     newStudent.surname = surname;
-                    newStudent.studyPeriod = studyStart + '-' + studyDoneDate;
+                    newStudent.age = new Date(age)
+                    newStudent.studyPeriod = studyPeriod
                     newStudent.fak = fak;
                     studArr.push(newStudent)
                 }
-                createStudent(addForm.inputName.value, addForm.inputMiddleName.value, addForm.inputSurname.value, studyStart, studyDoneDate, addForm.inputFak.value)
 
-                while (studDesk.firstChild) {
-                    studDesk.firstChild.remove();
-                }
+                createStudent(addForm.inputName.value, addForm.inputMiddleName.value, addForm.inputSurname.value, addForm.inputAge.value, studyPeriodCalcuate(studyStartInput), addForm.inputFak.value)
+
+                studDesk.innerHTML = ''
                 createList = createStudList(studArr);
                 studDesk.append(createList.studList);
                 for (let i = 0; i < elems.length; i++) {
@@ -279,18 +351,48 @@
             }
         })
 
+        addFilterForm.filterForm.addEventListener('click', (ev) => {
+            ev.preventDefault();
+            if ( ev.target.id === 'filterButtonId') {
+                studDesk.innerHTML =''
+            
+                const filterElems = document.querySelectorAll('.filterInput');
+                const filteredStudArr = studArr.filter( item => {
+                    console.log((item.studyPeriod).split('-')[0])
+                    if ((filterElems[0].value).toLowerCase() === (item.name).toLowerCase()) {
+                        return item
+                    } else if ((filterElems[0].value).toLowerCase() === (item.middleName).toLowerCase()) {
+                        return item
+                    } else if ((filterElems[0].value).toLowerCase() === (item.surname).toLowerCase()) {
+                        return item
+                    } else if (filterElems[1].value === (item.studyPeriod).split('-')[0]) {
+                        return item
+                    }
+                })
+                createList = createStudList(filteredStudArr);
+                studDesk.append(createList.studList);
+                for (let i = 0; i < filterElems.length; i++) {
+                    filterElems[i].value = '';
+                }
+            } else if ( ev.target.id === 'clearFilterButtonId' ) {
+                studDesk.innerHTML =''
+
+                createList = createStudList(studArr);
+                studDesk.append(createList.studList);
+            }
+        })
+
+        
+
         document.addEventListener('click', (ev) => {
             ev.preventDefault();
-            if (ev.target.id === 'Имя' ) {
+            if (ev.target.id === 'ФИО' ) {
                 nameSort(studArr);
             }
-            if (ev.target.id === 'Отчество' ) {
-                middleNameSort(studArr);
+            if (ev.target.id === 'Возраст' ) {
+                ageSort(studArr);
             }
-            if (ev.target.id === 'Фамилия' ) {
-                surnameSort(studArr);
-            }
-            if (ev.target.id === 'Дата окончания обучения' ) {
+            if (ev.target.id === 'Период обучения' ) {
                 studyStartSort(studArr);
             }
             if (ev.target.id === 'Факультет' ) {
@@ -308,19 +410,9 @@
             let sorterList = createStudList(sortedArray)
             studDesk.append(sorterList.studList)
         }
-        function middleNameSort(studArr) {
+        function ageSort(studArr) {
             let sortedArray = studArr.sort((prev, next) => {
-                if ( prev.middleName < next.middleName ) return -1;
-            });
-            while (studDesk.firstChild) {
-                studDesk.firstChild.remove();
-            }
-            let sorterList = createStudList(sortedArray)
-            studDesk.append(sorterList.studList)
-        }
-        function surnameSort(studArr) {
-            let sortedArray = studArr.sort((prev, next) => {
-                if ( prev.surname < next.surname ) return -1;
+                if ( _calculateAge(new Date(prev.age)) > _calculateAge(new Date(next.age)) ) return -1;
             });
             while (studDesk.firstChild) {
                 studDesk.firstChild.remove();
@@ -329,7 +421,7 @@
             studDesk.append(sorterList.studList)
         }
         function studyStartSort(studArr) {
-            const splitterRegex = /\W{1,3}/
+            const splitterRegex = /\W/
             let sortedArray = studArr.sort((prev, next) =>  {
                 let splitPrev = prev.studyPeriod.split(splitterRegex)
                 let splitNext = next.studyPeriod.split(splitterRegex)

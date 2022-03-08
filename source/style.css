@@ -1,0 +1,93 @@
+#formish, #filterForm {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.btn-primary, .headerItem, .headerItem:hover {
+  -webkit-transition: background-color 0.4s linear 0.1s;
+  transition: background-color 0.4s linear 0.1s;
+}
+
+.headerItem:hover {
+  background-color: rgba(255, 17, 0, 0.863);
+}
+
+.headerItem:hover {
+  -webkit-filter: drop-shadow(0px 0px 20px #ff1100);
+          filter: drop-shadow(0px 0px 20px #ff1100);
+}
+
+body {
+  background-color: #222222;
+}
+
+.btn-primary {
+  -webkit-filter: drop-shadow(0px 0px 5px #4400ff);
+          filter: drop-shadow(0px 0px 5px #4400ff);
+  -webkit-transition: -webkit-filter 0.4s linear 0.1s;
+  transition: -webkit-filter 0.4s linear 0.1s;
+  transition: filter 0.4s linear 0.1s;
+  transition: filter 0.4s linear 0.1s, -webkit-filter 0.4s linear 0.1s;
+}
+
+.btn-primary:hover {
+  -webkit-filter: drop-shadow(0px 0px 20px #4400ff);
+          filter: drop-shadow(0px 0px 20px #4400ff);
+  background-color: #0b5ed7;
+  -webkit-transition: background-color 0.4s linear 0.1s, -webkit-filter 0.4s linear 0.1s;
+  transition: background-color 0.4s linear 0.1s, -webkit-filter 0.4s linear 0.1s;
+  transition: filter 0.4s linear 0.1s, background-color 0.4s linear 0.1s;
+  transition: filter 0.4s linear 0.1s, background-color 0.4s linear 0.1s, -webkit-filter 0.4s linear 0.1s;
+}
+
+.headerItem {
+  width: 25%;
+  padding: 15px;
+  background-color: rgba(255, 17, 0, 0.301);
+  color: #fff;
+}
+
+.clearFilterButton {
+  background-color: rgba(255, 17, 0, 0.301);
+  border-color: rgba(255, 17, 0, 0.301);
+  -webkit-filter: drop-shadow(0px 0px 5px #ff1100);
+          filter: drop-shadow(0px 0px 5px #ff1100);
+}
+
+.clearFilterButton:hover {
+  -webkit-filter: drop-shadow(0px 0px 15px #ff1100);
+          filter: drop-shadow(0px 0px 15px #ff1100);
+  background-color: rgba(255, 17, 0, 0.863);
+  border-color: rgba(255, 17, 0, 0.863);
+  -webkit-transition: border-color 0.4s linear 0.1s, background-color 0.4s linear 0.1s, -webkit-filter 0.4s linear 0.1s;
+  transition: border-color 0.4s linear 0.1s, background-color 0.4s linear 0.1s, -webkit-filter 0.4s linear 0.1s;
+  transition: border-color 0.4s linear 0.1s, filter 0.4s linear 0.1s, background-color 0.4s linear 0.1s;
+  transition: border-color 0.4s linear 0.1s, filter 0.4s linear 0.1s, background-color 0.4s linear 0.1s, -webkit-filter 0.4s linear 0.1s;
+}
+
+.clearFilterButton:active {
+  -webkit-filter: drop-shadow(0px 0px 15px #ff1100);
+          filter: drop-shadow(0px 0px 15px #ff1100);
+  background-color: rgba(255, 17, 0, 0.863);
+  border-color: rgba(255, 17, 0, 0.863);
+  -webkit-box-shadow: 0 0 0 0;
+          box-shadow: 0 0 0 0;
+}
+
+.clearFilterButton:focus {
+  -webkit-filter: drop-shadow(0px 0px 15px #ff1100);
+          filter: drop-shadow(0px 0px 15px #ff1100);
+  background-color: rgba(255, 17, 0, 0.863);
+  border-color: rgba(255, 17, 0, 0.863);
+  -webkit-box-shadow: 0 0 0 0;
+          box-shadow: 0 0 0 0;
+}
+
+.studItem {
+  width: 200px;
+}
+
+#formish, #filterForm {
+  width: 98%;
+}
+/*# sourceMappingURL=style.css.map */

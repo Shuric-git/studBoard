@@ -1,0 +1,24 @@
+{
+  "name": "studdesk",
+  "version": "1.0.0",
+  "description": "",
+  "main": "studDesk.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shuric-git/studBoard.git"
+  },
+  "author": "Shuric",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Shuric-git/studBoard/issues"
+  },
+  "homepage": "https://github.com/Shuric-git/studBoard#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-sass": "^5.1.0",
+    "sass": "^1.49.9"
+  }
+}

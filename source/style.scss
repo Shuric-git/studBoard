@@ -1,0 +1,80 @@
+%centerElement {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+%transitionBG {
+    transition: background-color 0.4s linear 0.1s;
+}
+
+%redBG {
+    background-color: rgba(255, 17, 0, 0.863);
+}
+
+%redShine {
+    filter: drop-shadow(0px 0px 20px rgba(255, 17, 0, 1));
+}
+
+body {
+    background-color: rgb(34, 34, 34);
+}
+
+.btn-primary {
+    filter: drop-shadow(0px 0px 5px rgb(68, 0, 255));
+    @extend %transitionBG;
+    transition: filter 0.4s linear 0.1s;
+    &:hover {
+        filter: drop-shadow(0px 0px 20px rgb(68, 0, 255));
+        background-color: #0b5ed7;
+        transition: filter 0.4s linear 0.1s, background-color 0.4s linear 0.1s;
+        // transition:  0.4s linear 0.1s;
+    }
+}
+
+.headerItem {
+    width: 25%;
+    padding: 15px;
+    background-color: rgba(255, 17, 0, 0.301);
+    color: #fff;
+    @extend %transitionBG;
+    &:hover {
+        @extend %redBG;
+        @extend %redShine;
+        @extend %transitionBG;
+    }
+}
+
+.clearFilterButton {
+    
+    background-color: rgba(255, 17, 0, 0.301);
+    border-color: rgba(255, 17, 0, 0.301);
+    filter: drop-shadow(0px 0px 5px rgba(255, 17, 0, 1));
+    &:hover {
+        filter: drop-shadow(0px 0px 15px rgba(255, 17, 0, 1));
+        background-color: rgba(255, 17, 0, 0.863);
+        border-color: rgba(255, 17, 0, 0.863);
+        transition: border-color 0.4s linear 0.1s, filter 0.4s linear 0.1s, background-color 0.4s linear 0.1s;
+    }
+    &:active {
+        filter: drop-shadow(0px 0px 15px rgba(255, 17, 0, 1));
+        background-color: rgba(255, 17, 0, 0.863);
+        border-color: rgba(255, 17, 0, 0.863);
+        box-shadow: 0 0 0 0;
+    }
+    &:focus {
+        filter: drop-shadow(0px 0px 15px rgba(255, 17, 0, 1));
+        background-color: rgba(255, 17, 0, 0.863);
+        border-color: rgba(255, 17, 0, 0.863);
+        box-shadow: 0 0 0 0;
+    }
+}
+
+.studItem {
+    width: 200px;
+}
+
+#formish, #filterForm{
+    width: 98%;
+    @extend %centerElement
+}
+
