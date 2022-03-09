@@ -35,7 +35,7 @@
         inputFak.classList.add('form-control', 'addInput');
         inputFak.value = 'Тестерин';
         subButton.classList.add('btn', 'btn-primary');
-        subButton.textContent = 'Добавить студента';
+        subButton.textContent = '+';
 
         form.append(
             inputName,
@@ -76,10 +76,14 @@
         filterAge.classList.add('form-control', 'filterAgeInput', 'filterInput');
         filterFak.classList.add('form-control', 'filterFakInput', 'filterInput');
         filterButton.classList.add('filterButton', 'btn', 'btn-primary');
-        filterButton.id = 'filterButtonId'
+        filterButton.id = 'filterButtonId';
         clearFilterButton.classList.add('clearFilterButton', 'btn', 'btn-primary');
-        clearFilterButton.id = 'clearFilterButtonId'
+        clearFilterButton.id = 'clearFilterButtonId';
         
+        for ( let i = 0; i < 4; i++ ) {
+            filterForm.append(
+                document.createElement('input').classList.add('form-control', 'filterInput'));
+        };
 
         filterForm.append(
             clearFilterButton, 
@@ -199,14 +203,14 @@
 
     function studyPeriodCalcuate(studyStartYear) {
         let currentDate = new Date();
-        console.log(currentDate.getFullYear())
-        let studyDoneDate = +studyStartYear + 4;
-        if (studyDoneDate < currentDate.getFullYear()) {
-            studyDoneDate += (' (закончил)')
-        } else if (studyDoneDate === currentDate.getFullYear() && currentDate.getMonth() >= 7) {
-            studyDoneDate += (' (закончил)')
+        let studyDoneYear = +studyStartYear + 4;
+        if (studyDoneYear < currentDate.getFullYear()) {
+            studyDoneYear += (' (закончил)')
+        } else if (studyDoneYear === currentDate.getFullYear() && currentDate.getMonth() >= 7) {
+            studyDoneYear += (' (закончил)')
         }
-        const studyPeriod = studyStartYear + '-' + studyDoneDate;
+        const studyPeriod = studyStartYear + '-' + studyDoneYear;
+        // console.log(studyPeriod)
         return studyPeriod
     }
 
@@ -279,13 +283,13 @@
                 let elems = document.querySelectorAll('.addInput');
                 for (let i = 0; i < elems.length; i++) {
                         if (elems[i].value === ''){
-	                    elems[i].placeholder = 'Вы забыли заполнить это поле';
+	                    elems[i].placeholder = 'Вы забыли заполнить';
                     } else {
                         elems[i].placeholder = ''
                     }
                 }
                 for (let i = 0; i < elems.length; i++) {
-                    if (elems[i].placeholder === 'Вы забыли заполнить это поле'){
+                    if (elems[i].placeholder === 'Вы забыли заполнить'){
                     return
                     }
                 }
@@ -293,21 +297,21 @@
                 const dateRegex = /\d{4}/
 
                 if (!addForm.inputStudyStart.value.match(dateRegex)) {
-                    addForm.inputStudyStart.value = 'Введите дату в формате ГГГГ.ММ.ДД';
+                    addForm.inputStudyStart.value = 'Введите год';
                     return
                 }
 
                 let studyStartInput = addForm.inputStudyStart.value
 
-                // function CreateStudent(name, middleName, surname, studyDoneDate, fak) {
+                // function CreateStudent(name, middleName, surname, studyDoneYear, fak) {
                 //     this.name = name;
                 //     this.middleName = middleName;
                 //     this.surname = surname;
-                //     this.studystart = studyDoneDate;
+                //     this.studystart = studyDoneYear;
                 //     this.fak = fak;
                 // }
     
-                // let newStudent = new CreateStudent(addForm.inputName.value, addForm.inputMiddleName.value, addForm.inputSurname.value, studyDoneDate, addForm.inputFak.value)
+                // let newStudent = new CreateStudent(addForm.inputName.value, addForm.inputMiddleName.value, addForm.inputSurname.value, studyDoneYear, addForm.inputFak.value)
 
                 function createStudent(name, middleName, surname, age, studyPeriod, fak) {
                     let newStudent = {}
@@ -320,7 +324,7 @@
                     studArr.push(newStudent)
                 }
 
-                createStudent(addForm.inputName.value, addForm.inputMiddleName.value, addForm.inputSurname.value, addForm.inputAge.value, studyPeriodCalcuate(studyStartInput), addForm.inputFak.value)
+                createStudent(addForm.inputName.value, addForm.inputMiddleName.value, addForm.inputSurname.value, addForm.inputAge.value, studyStartInput, addForm.inputFak.value)
 
                 studDesk.innerHTML = ''
                 createList = createStudList(studArr);
@@ -358,7 +362,6 @@
             
                 const filterElems = document.querySelectorAll('.filterInput');
                 const filteredStudArr = studArr.filter( item => {
-                    console.log((item.studyPeriod).split('-')[0])
                     if ((filterElems[0].value).toLowerCase() === (item.name).toLowerCase()) {
                         return item
                     } else if ((filterElems[0].value).toLowerCase() === (item.middleName).toLowerCase()) {

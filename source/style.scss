@@ -3,16 +3,26 @@
     margin-left: auto;
 }
 
-%transitionBG {
-    transition: background-color 0.4s linear 0.1s;
+%transition {
+    transition: border-color 0.4s linear 0.1s, filter 0.4s linear 0.1s, background-color 0.4s linear 0.1s;
 }
 
-%redBG {
-    background-color: rgba(255, 17, 0, 0.863);
+@mixin redButtonInactive($prop) {
+    background-color: $prop;
+    border-color: $prop;
+    filter: drop-shadow(0px 0px 5px rgba(255, 17, 0, 1));
 }
 
-%redShine {
-    filter: drop-shadow(0px 0px 20px rgba(255, 17, 0, 1));
+@mixin redButtonActive($prop) {
+    background-color: $prop;
+    border-color: $prop;
+    filter: drop-shadow(0px 0px 17px rgba(255, 17, 0, 1));
+}
+
+%BGIFormat {
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
 }
 
 body {
@@ -21,13 +31,12 @@ body {
 
 .btn-primary {
     filter: drop-shadow(0px 0px 5px rgb(68, 0, 255));
-    @extend %transitionBG;
-    transition: filter 0.4s linear 0.1s;
+    background-color: #0f4eac;
+    @extend %transition;
     &:hover {
-        filter: drop-shadow(0px 0px 20px rgb(68, 0, 255));
-        background-color: #0b5ed7;
-        transition: filter 0.4s linear 0.1s, background-color 0.4s linear 0.1s;
-        // transition:  0.4s linear 0.1s;
+        filter: drop-shadow(0px 0px 10px rgb(68, 0, 255));
+        background-color: #0d6efd;
+        @extend %transition;
     }
 }
 
@@ -36,35 +45,34 @@ body {
     padding: 15px;
     background-color: rgba(255, 17, 0, 0.301);
     color: #fff;
-    @extend %transitionBG;
+    @extend %transition;
     &:hover {
-        @extend %redBG;
-        @extend %redShine;
-        @extend %transitionBG;
+        @include redButtonActive(rgba(255, 17, 0, 0.863));
+        @extend %transition;
     }
 }
 
+.filterButton {
+    background-image: url(img/vector.svg);
+    @extend %BGIFormat;
+    padding: 17px;
+}
+
 .clearFilterButton {
-    
-    background-color: rgba(255, 17, 0, 0.301);
-    border-color: rgba(255, 17, 0, 0.301);
-    filter: drop-shadow(0px 0px 5px rgba(255, 17, 0, 1));
+    background-image: url(img/formateWhite.svg);
+    @extend %BGIFormat;
+    @include redButtonInactive(rgba(255, 17, 0, 0.301));
+    @extend %transition;
     &:hover {
-        filter: drop-shadow(0px 0px 15px rgba(255, 17, 0, 1));
-        background-color: rgba(255, 17, 0, 0.863);
-        border-color: rgba(255, 17, 0, 0.863);
-        transition: border-color 0.4s linear 0.1s, filter 0.4s linear 0.1s, background-color 0.4s linear 0.1s;
+        @include redButtonActive(rgba(255, 17, 0, 0.863));
+        @extend %transition;
     }
     &:active {
-        filter: drop-shadow(0px 0px 15px rgba(255, 17, 0, 1));
-        background-color: rgba(255, 17, 0, 0.863);
-        border-color: rgba(255, 17, 0, 0.863);
+        @include redButtonActive(rgba(255, 17, 0, 0.863));
         box-shadow: 0 0 0 0;
     }
     &:focus {
-        filter: drop-shadow(0px 0px 15px rgba(255, 17, 0, 1));
-        background-color: rgba(255, 17, 0, 0.863);
-        border-color: rgba(255, 17, 0, 0.863);
+        @include redButtonActive(rgba(255, 17, 0, 0.863));
         box-shadow: 0 0 0 0;
     }
 }
@@ -74,6 +82,7 @@ body {
 }
 
 #formish, #filterForm{
+    margin-top: 20px;
     width: 98%;
     @extend %centerElement
 }
